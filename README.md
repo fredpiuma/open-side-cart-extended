@@ -35,6 +35,14 @@ O objetivo é manter o cliente dentro do carrinho lateral: ele simula o frete, v
 2. No WordPress, vá em **Plugins → Adicionar novo → Enviar plugin**, escolha o ZIP e clique em **Instalar agora**.
 3. Ative o plugin.
 
+### Via WP-CLI
+
+```bash
+wp plugin install https://github.com/fredpiuma/open-side-cart-extended/archive/refs/heads/main.zip --activate --force
+```
+
+O `--force` sobrescreve uma versão já instalada, então o mesmo comando também serve para atualizar.
+
 ### Via Git
 
 ```bash
