@@ -1,0 +1,160 @@
+/**
+ * XSC Addons — estilos dos blocos do Side Cart.
+ * As regras que usam classes do próprio Side Cart trazem os seletores das
+ * duas versões: premium (xoo-wsc-*) e Open Side Cart (osc-*).
+ */
+
+/**
+ * Simulador de frete no Side Cart (acima das formas de pagamento)
+ */
+.xsc-frete {
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 15px;
+    text-align: left;
+    color: black;
+}
+
+.xsc-frete__titulo {
+    display: block;
+    margin: 0 0 8px;
+    font-weight: 600;
+}
+
+.xsc-frete__campos {
+    display: flex;
+    gap: 8px;
+}
+
+.xsc-frete__cep {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 40px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: none;
+}
+
+/* Seletor mais específico para vencer os estilos de button do tema/WooCommerce
+   (padding, line-height, min-height e cores de hover/focus). */
+.xsc-frete .xsc-frete__botao,
+.xsc-frete .xsc-frete__botao:hover,
+.xsc-frete .xsc-frete__botao:focus,
+.xsc-frete .xsc-frete__botao:active {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    min-height: 0;
+    margin: 0;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 6px;
+    background: #27374d;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    text-transform: none;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.xsc-frete .xsc-frete__botao:hover {
+    opacity: 0.9;
+}
+
+.xsc-frete .xsc-frete__botao:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.xsc-frete__opcoes,
+.xsc-frete__vazio {
+    margin: 12px 0 0;
+    padding: 4px 14px;
+    border-radius: 6px;
+    background: #fafaf7;
+}
+
+.xsc-frete__opcoes {
+    list-style: none;
+}
+
+.xsc-frete__vazio {
+    padding: 10px 14px;
+}
+
+.xsc-frete__opcoes li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    line-height: 1.4;
+}
+
+.xsc-frete__opcoes li+li {
+    border-top: 1px solid #ebebe6;
+}
+
+.xsc-frete__icone {
+    flex: 0 0 auto;
+    font-size: 1.2em;
+    line-height: 1;
+}
+
+
+/**
+ * Formas de pagamento no Side Cart (abaixo do simulador de frete)
+ */
+.xsc-pagamento {
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 15px;
+    text-align: left;
+}
+
+.xsc-pagamento__lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.xsc-pagamento__lista li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0.4em 0;
+    line-height: 1.4;
+    color: black;
+}
+
+.xsc-pagamento__icone {
+    flex: 0 0 auto;
+    font-size: 1.3em;
+    line-height: 1;
+}
+
+/**
+ * Esconde o ícone flutuante do Side Cart no checkout. O Side Cart continua
+ * abrindo pelo link "Editar carrinho". Opção "Link Editar carrinho do checkout".
+ */
+body.xsc-ocultar-basket-checkout.woocommerce-checkout .xoo-wsc-basket,
+body.xsc-ocultar-basket-checkout.woocommerce-checkout .osc-basket {
+    display: none !important;
+}
+
+/**
+ * Oculta preço e subtotal dos itens filhos de pacotes no Side Cart.
+ * Opção "Ocultar preços dos subprodutos".
+ */
+body.xsc-ocultar-preco-filhos .xoo-wsc-is-child span.xoo-wsc-smr-ptotal,
+body.xsc-ocultar-preco-filhos .xoo-wsc-is-child .xoo-wsc-qty-price,
+body.xsc-ocultar-preco-filhos .osc-is-child span.osc-smr-ptotal,
+body.xsc-ocultar-preco-filhos .osc-is-child .osc-qty-price {
+    display: none;
+}
