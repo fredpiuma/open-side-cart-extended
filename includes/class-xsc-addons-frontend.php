@@ -28,6 +28,11 @@ class XSC_Addons_Frontend
 			add_action($hook, array(__CLASS__, 'bloco_pagamento'), 10);
 		}
 
+		// '{prefixo}_cart_totals' é aplicado no fim de get_totals() do Side Cart.
+		if ($o::ativo('ocultar_frete_sem_cep')) {
+			add_filter($o::side_cart()['php'] . '_cart_totals', array(__CLASS__, 'ocultar_frete_sem_cep'));
+		}
+
 		if ($o::ativo('bloquear_carrinho')) {
 			add_action('template_redirect', array(__CLASS__, 'bloquear_carrinho'));
 		}
@@ -177,6 +182,26 @@ class XSC_Addons_Frontend
 			</ul>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Sem CEP na sessão, o Side Cart mostra "Free!"/"Grátis!" na linha de
+	 * frete: get_totals() usa WC()->cart->get_cart_shipping_total() sempre que
+	 * o pacote tem tarifas, e sem método escolhido o frete fica zero (o
+	 * WooCommerce começa esse texto com __('Free!')). Remove a linha até o
+	 * cliente informar o CEP.
+	 *
+	 * Os totais são refeitos a cada atualização via fragments: ao calcular pelo
+	 * simulador (WC_Shortcode_Cart::calculate_shipping grava o CEP na sessão),
+	 * a linha volta sozinha.
+	 */
+	public static function ocultar_frete_sem_cep($totals)
+	{
+		if (!WC()->customer || '' === trim((string) WC()->customer->get_shipping_postcode())) {
+			unset($totals['shipping']);
+		}
+
+		return $totals;
 	}
 
 	/**

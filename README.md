@@ -7,6 +7,7 @@ O objetivo é manter o cliente dentro do carrinho lateral: ele simula o frete, v
 ## Benefícios
 
 - **Simulador de frete no carrinho lateral**: campo de CEP e botão "Calcular", abaixo dos produtos. Usa o cálculo de frete nativo do WooCommerce, então funciona com qualquer método já configurado (Correios, Frenet, frete fixo, frete grátis etc.). As opções aparecem só para consulta, com ícones e preços.
+- **Sem "Grátis" falso no frete (opcional)**: numa sessão nova, o carrinho lateral pode mostrar o frete como "Grátis!" antes de o cliente informar o CEP, mesmo sem frete grátis na loja. A opção esconde a linha de frete até existir um CEP na sessão.
 - **Formas de pagamento em destaque**: até 3 frases (ex.: "Parcele em até 6x sem juros no cartão", "5% de desconto no PIX"), editáveis pela página de opções, com ícones fixos.
 - **Carrinho nativo bloqueado (opcional)**: quem acessa a página do carrinho vai para a home com o carrinho lateral aberto.
 - **Mais caminhos para abrir o carrinho lateral**:
@@ -60,6 +61,7 @@ Vá em **WooCommerce → Side Cart Extended** e ligue os recursos que quiser. A 
 |---|---|
 | Calcular frete no carrinho | Simulador de CEP no carrinho lateral |
 | Bloquear abertura do carrinho nativo | Redireciona a página do carrinho para a home, com o carrinho lateral aberto |
+| Esconder frete quando sessão sem CEP | Remove a linha "Frete" dos totais até o cliente informar o CEP, evitando o "Grátis" antes do cálculo. O atalho da calculadora nativa, que fica nessa linha, também some até haver CEP |
 | Formas de pagamento | Lista de frases com ícone. Cada linha tem texto editável e pode ser ativada ou desativada |
 | Link "Editar carrinho" do checkout | Abre o carrinho lateral no checkout e oculta o ícone flutuante |
 | Seletor que abre o Side Cart | Seletor CSS de links que devem abrir o carrinho lateral |
@@ -74,6 +76,16 @@ Se o WooCommerce ou nenhum Side Cart estiver ativo, o plugin mostra um aviso no 
 
 - Filtro `xsc_addons_formas_pagamento`: altera a lista de formas de pagamento (array de `['icone' => '', 'texto' => '']`).
 - As classes CSS dos blocos usam o prefixo `xsc-` (`.xsc-frete`, `.xsc-pagamento`) e podem ser sobrescritas pelo tema.
+
+## Versões
+
+### 1.1.0
+
+- Nova opção **Esconder frete quando sessão sem CEP**: remove a linha de frete dos totais do carrinho lateral enquanto não houver CEP na sessão, evitando o "Grátis!" antes do cálculo. Usa o filtro `osc_cart_totals` / `xoo_wsc_cart_totals`.
+
+### 1.0.0
+
+- Versão inicial: simulador de frete, formas de pagamento, bloqueio do carrinho nativo, atalhos para abrir o carrinho lateral, atualização ao aplicar/remover cupom, tradução do "Update" e ajustes para produtos agrupados (woosb/woosg).
 
 ## Licença
 

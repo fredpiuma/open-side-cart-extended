@@ -3,7 +3,7 @@
  * Plugin Name: Open Side Cart Extended
  * Plugin URI: https://github.com/fredpiuma/open-side-cart-extended
  * Description: Recursos extras para o Open Side Cart, compatível também com o Side Cart by XootiX: simulador de frete, formas de pagamento, bloqueio da página do carrinho, atalhos para abrir o Side Cart e ajustes para produtos agrupados (WPC Product Bundles / Grouped).
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Frederico de Castro
  * Author URI: https://www.fredericodecastro.com.br/links
  * License: GPL-2.0-or-later
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('XSC_ADDONS_VERSION', '1.0.0');
+define('XSC_ADDONS_VERSION', '1.1.0');
 define('XSC_ADDONS_PATH', plugin_dir_path(__FILE__));
 define('XSC_ADDONS_URL', plugin_dir_url(__FILE__));
 

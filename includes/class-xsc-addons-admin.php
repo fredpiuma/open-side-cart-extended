@@ -18,7 +18,7 @@ class XSC_Addons_Admin
 	private static function checkboxes()
 	{
 		return array(
-			'frete', 'bloquear_carrinho', 'pagamento',
+			'frete', 'bloquear_carrinho', 'ocultar_frete_sem_cep', 'pagamento',
 			'cupom_refresh', 'editar_carrinho_checkout', 'traduzir_update',
 			'ocultar_preco_filhos', 'corrigir_nome_variacao',
 		);
@@ -123,6 +123,7 @@ class XSC_Addons_Admin
 					<?php
 					self::checkbox('frete', 'Calcular frete no carrinho', 'Campo de CEP e botão Calcular no Side Cart, abaixo dos produtos. Usa o cálculo de frete nativo do WooCommerce; as opções são só exibidas, sem escolha.');
 					self::checkbox('bloquear_carrinho', 'Bloquear abertura do carrinho nativo', 'Quem acessar a página do carrinho é redirecionado para a home, e o Side Cart abre automaticamente.');
+					self::checkbox('ocultar_frete_sem_cep', 'Esconder frete quando sessão sem CEP', 'Remove a linha "Frete" dos totais do Side Cart enquanto o cliente não informou o CEP, evitando que apareça "Grátis" antes do cálculo. Se a calculadora nativa do Side Cart estiver ativa, o atalho para ela (que fica nessa linha) também some até haver CEP; o simulador de frete acima cobre esse papel.');
 					self::checkbox('pagamento', 'Formas de pagamento', 'Lista de formas de pagamento no Side Cart, abaixo do simulador de frete.');
 					?>
 					<tr>

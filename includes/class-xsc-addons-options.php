@@ -49,6 +49,7 @@ class XSC_Addons_Options
 			// Carrinho
 			'frete'                    => 1,
 			'bloquear_carrinho'        => 0,
+			'ocultar_frete_sem_cep'    => 0,
 			'pagamento'                => 1,
 			'pagamento_itens'          => array(
 				array('texto' => 'Parcele em até 6x sem juros no cartão', 'ativo' => 1),
