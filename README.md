@@ -26,15 +26,6 @@ wp plugin install https://github.com/fredpiuma/open-side-cart-extended/releases/
 
 O mesmo comando instala e atualiza: o `--force` substitui a versão instalada pela última, já que o plugin não tem atualização automática pelo painel.
 
-### Pelo Git (para desenvolvimento)
-
-```bash
-cd wp-content/plugins
-git clone https://github.com/fredpiuma/open-side-cart-extended.git
-```
-
-Depois ative o plugin em **Plugins**.
-
 Requer WordPress 6.0+, PHP 7.4+, WooCommerce e o Open Side Cart **ou** o Side Cart by XootiX (WooCommerce Side Cart Premium).
 
 ## Benefícios
