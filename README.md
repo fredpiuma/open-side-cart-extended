@@ -4,6 +4,39 @@ Recursos extras para o carrinho lateral do WooCommerce. Funciona com o **Open Si
 
 O objetivo é manter o cliente dentro do carrinho lateral: ele simula o frete, vê as formas de pagamento e edita o carrinho sem ir para a página do carrinho, que costuma ser lenta e tirar o foco da compra.
 
+## Instalação
+
+**[Baixar o plugin (zip da última versão)](https://github.com/fredpiuma/open-side-cart-extended/releases/latest/download/open-side-cart-extended.zip)**
+
+Esse zip tem só os arquivos do plugin. Não use o "Source code (zip)" nem o **Code → Download ZIP** do GitHub para instalar: eles trazem arquivos de desenvolvimento e a pasta fica com o nome errado.
+
+### Pelo painel do WordPress
+
+1. Baixe o zip pelo link acima.
+2. Em **Plugins → Adicionar novo → Enviar plugin**, escolha o arquivo e clique em **Instalar agora**.
+3. Ative o **Open Side Cart Extended**.
+
+Para atualizar, envie o zip da versão nova da mesma forma e confirme a substituição da versão instalada.
+
+### Pelo WP-CLI
+
+```bash
+wp plugin install https://github.com/fredpiuma/open-side-cart-extended/releases/latest/download/open-side-cart-extended.zip --force --activate
+```
+
+O mesmo comando instala e atualiza: o `--force` substitui a versão instalada pela última, já que o plugin não tem atualização automática pelo painel.
+
+### Pelo Git (para desenvolvimento)
+
+```bash
+cd wp-content/plugins
+git clone https://github.com/fredpiuma/open-side-cart-extended.git
+```
+
+Depois ative o plugin em **Plugins**.
+
+Requer WordPress 6.0+, PHP 7.4+, WooCommerce e o Open Side Cart **ou** o Side Cart by XootiX (WooCommerce Side Cart Premium).
+
 ## Benefícios
 
 - **Simulador de frete no carrinho lateral**: campo de CEP e botão "Calcular", abaixo dos produtos. Usa o cálculo de frete nativo do WooCommerce, então funciona com qualquer método já configurado (Correios, Frenet, frete fixo, frete grátis etc.). As opções aparecem só para consulta, com ícones e preços.
@@ -20,38 +53,6 @@ O objetivo é manter o cliente dentro do carrinho lateral: ele simula o frete, v
   - Corrigir o nome dos subprodutos com mais de um atributo na variação, no pedido e no e-mail (ex.: "Top Fitness - M, Preto").
 - **Tudo liga e desliga** pela página de opções, sem mexer em código nem no tema.
 - **Compatível com as duas versões do Side Cart**: detecta automaticamente se o site usa o Open Side Cart ou o Side Cart by XootiX.
-
-## Requisitos
-
-- WordPress 6.0+
-- PHP 7.4+
-- WooCommerce
-- Open Side Cart **ou** Side Cart by XootiX (WooCommerce Side Cart Premium)
-
-## Instalação
-
-### Pelo painel do WordPress
-
-1. Baixe o ZIP do repositório: botão **Code → Download ZIP**, ou a página de [releases](https://github.com/fredpiuma/open-side-cart-extended/releases), se houver.
-2. No WordPress, vá em **Plugins → Adicionar novo → Enviar plugin**, escolha o ZIP e clique em **Instalar agora**.
-3. Ative o plugin.
-
-### Via WP-CLI
-
-```bash
-wp plugin install https://github.com/fredpiuma/open-side-cart-extended/archive/refs/heads/main.zip --activate --force
-```
-
-O `--force` sobrescreve uma versão já instalada, então o mesmo comando também serve para atualizar.
-
-### Via Git
-
-```bash
-cd wp-content/plugins
-git clone https://github.com/fredpiuma/open-side-cart-extended.git
-```
-
-Depois ative o plugin em **Plugins**.
 
 ## Configuração
 
@@ -79,13 +80,7 @@ Se o WooCommerce ou nenhum Side Cart estiver ativo, o plugin mostra um aviso no 
 
 ## Versões
 
-### 1.1.0
-
-- Nova opção **Esconder frete quando sessão sem CEP**: remove a linha de frete dos totais do carrinho lateral enquanto não houver CEP na sessão, evitando o "Grátis!" antes do cálculo. Usa o filtro `osc_cart_totals` / `xoo_wsc_cart_totals`.
-
-### 1.0.0
-
-- Versão inicial: simulador de frete, formas de pagamento, bloqueio do carrinho nativo, atalhos para abrir o carrinho lateral, atualização ao aplicar/remover cupom, tradução do "Update" e ajustes para produtos agrupados (woosb/woosg).
+Veja no [CHANGELOG.md](CHANGELOG.md) o que mudou em cada versão.
 
 ## Licença
 

@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+env:
+  SLUG: open-side-cart-extended # nome da pasta dentro do zip (o arquivo principal tem outro nome; não renomear)
+  MAIN: xsc-addons.php          # arquivo com o cabeçalho "Plugin Name:"
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Conferir que a versão do código é a da tag
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          WANTED="${TAG#v}"
+          HEADER="$(sed -n 's/^[ *]*Version: *//p' "$MAIN" | head -1 | tr -d '\r ')"
+          CONST="$(sed -n "s/.*define( *'XSC_ADDONS_VERSION', *'\([^']*\)'.*/\1/p" "$MAIN" | head -1)"
+          echo "tag=$WANTED cabeçalho=$HEADER constante=$CONST"
+          for v in "$HEADER" "$CONST"; do
+            [ "$v" = "$WANTED" ] || { echo "A versão da tag ($WANTED) não bate com a do código ($v)." >&2; exit 1; }
+          done
+
+      - name: Gerar o zip
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          EXCLUDE=(.github tools docs tests node_modules CLAUDE.md AGENTS.md GEMINI.md README.md CHANGELOG.md .gitignore .gitattributes)
+          PATHSPEC=(.)
+          for p in "${EXCLUDE[@]}"; do PATHSPEC+=(":(exclude)$p"); done
+          mkdir -p out
+          git archive --format=zip --prefix="$SLUG/" -o "out/$SLUG-${TAG#v}.zip" HEAD -- "${PATHSPEC[@]}"
+          cp "out/$SLUG-${TAG#v}.zip" "out/$SLUG.zip"
+
+      - name: Conferir o conteúdo do zip
+        run: |
+          unzip -Z1 "out/$SLUG.zip" > lista.txt
+          if grep -v "^$SLUG/" lista.txt | grep -q .; then
+            echo "O zip tem arquivos fora da pasta $SLUG/" >&2; exit 1
+          fi
+          if grep -E "^$SLUG/(\.github/|tools/|docs/|CLAUDE\.md|AGENTS\.md|GEMINI\.md|README\.md|CHANGELOG\.md)" lista.txt; then
+            echo "O zip tem arquivos de desenvolvimento" >&2; exit 1
+          fi
+          grep -qx "$SLUG/$MAIN" lista.txt
+
+      - name: Anexar os zips ao release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$TAG" out/*.zip --clobber
